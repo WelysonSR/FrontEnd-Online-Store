@@ -1,5 +1,4 @@
 import React from 'react';
-import Category from './components/Category';
 import {
   BrowserRouter,
   Switch,
@@ -9,16 +8,15 @@ import TelaPrincioal from './components/TelaPrincioal';
 
 function App() {
   return (
-      <Category />
-      <BrowserRouter>
-        <Switch>
-          <Route
-            exact
-            path="/"
-            component={ TelaPrincioal }
-          />
-        </Switch>
-      </BrowserRouter>
+    <BrowserRouter>
+      <Switch>
+        <Route
+          exact
+          path="/"
+          component={ TelaPrincioal }
+        />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
