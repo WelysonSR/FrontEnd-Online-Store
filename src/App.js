@@ -1,25 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import Category from './components/Category';
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+} from 'react-router-dom';
+import TelaPrincioal from './components/TelaPrincioal';
 
 function App() {
   return (
-    <div className="App">
       <Category />
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-        <p>Edit src/App.js and save to reload.</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <BrowserRouter>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            component={ TelaPrincioal }
+          />
+        </Switch>
+      </BrowserRouter>
   );
 }
 
