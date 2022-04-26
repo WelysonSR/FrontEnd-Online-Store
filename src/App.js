@@ -1,10 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-// 1st commit
+import Category from './components/Category';
+
 function App() {
   return (
     <div className="App">
+      <Category />
       <header className="App-header">
         <img src={ logo } className="App-logo" alt="logo" />
         <p>Edit src/App.js and save to reload.</p>
