@@ -11,7 +11,11 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={ TelaPrincioal } />
+          <Route
+            exact
+            path="/"
+            component={ TelaPrincioal }
+          />
         </Switch>
       </BrowserRouter>
     </div>
