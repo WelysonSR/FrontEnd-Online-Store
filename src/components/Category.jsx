@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 
 class Category extends React.Component {
@@ -21,12 +22,17 @@ class Category extends React.Component {
     return (
       <ul>
         {categories.map((category) => (
-          <li
-            data-testid="category"
+          <Link
+            to={ `/${category.id}` }
             key={ category.id }
           >
-            {category.name}
-          </li>))}
+            <li
+              data-testid="category"
+            >
+              {category.name}
+            </li>
+          </Link>
+        ))}
       </ul>
     );
   }
