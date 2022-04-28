@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Category from './Category';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import { getProductsFromCategoryAndQuery, getItemsByCategory } from '../services/api';
 import Produto from './Produto';
 import Header from './Header';
 
@@ -9,6 +10,7 @@ class TelaPrincipal extends React.Component {
     super();
     this.state = {
       produtos: [],
+      categoria: [],
     };
   }
 
@@ -24,24 +26,46 @@ class TelaPrincipal extends React.Component {
     console.log(target.value);
   }
 
+  pesqisarPorCategoria = async () => {
+    const { location } = this.props;
+    const id = location.pathname.split('/');
+    const categoria = await getItemsByCategory(id[1]);
+    console.log(categoria);
+    this.setState({ categoria: categoria.results });
+  }
+
   render() {
-    const { produtos } = this.state;
+    const { produtos, categoria } = this.state;
 
     return (
       <>
         <Header />
         <Category />
         {
-          produtos.map((produto, i) => (
-            <Produto
-              key={ i }
-              produto={ produto }
-            />
-          ))
+          (categoria.length <= 0) ? (
+            produtos.map((produto, index) => (
+              <Produto
+                key={ index }
+                produto={ produto }
+              />
+            ))
+          )
+            : categoria.map((produto, i) => (
+              <Produto
+                key={ i }
+                produto={ produto }
+              />
+            ))
         }
       </>
     );
   }
 }
+
+TelaPrincipal.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default TelaPrincipal;
