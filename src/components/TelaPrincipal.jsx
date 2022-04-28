@@ -36,6 +36,7 @@ class TelaPrincipal extends React.Component {
 
   render() {
     const { produtos, categoria } = this.state;
+    const { history } = this.props;
 
     return (
       <>
@@ -47,6 +48,7 @@ class TelaPrincipal extends React.Component {
               <Produto
                 key={ index }
                 produto={ produto }
+                history={ history }
               />
             ))
           )
@@ -54,6 +56,7 @@ class TelaPrincipal extends React.Component {
               <Produto
                 key={ i }
                 produto={ produto }
+                history={ history }
               />
             ))
         }
@@ -63,6 +66,9 @@ class TelaPrincipal extends React.Component {
 }
 
 TelaPrincipal.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,

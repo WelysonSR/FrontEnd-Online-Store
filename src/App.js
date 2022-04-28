@@ -14,8 +14,9 @@ function App() {
       <Switch>
         <Route exact path="/" component={ TelaPrincipal } />
         <Route exact path="/carrinho" component={ CarrinhoCompras } />
-        <Route exact path="/:id" component={ TelaPrincipal } />
+        <Route exact path="/carrinho/:produto" component={ CarrinhoCompras } />
         <Route exact path="/produto-detalhe/:id" component={ ProdutoDetalhe } />
+        <Route exact path="/:id" component={ TelaPrincipal } />
       </Switch>
     </BrowserRouter>
   );
