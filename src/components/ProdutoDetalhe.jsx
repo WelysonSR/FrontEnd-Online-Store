@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { productDetail } from '../services/api';
 import Header from './Header';
+import { pushCarinho } from '../func/carrinhoDeCompras';
 
 class ProdutoDetalhe extends React.Component {
   constructor() {
@@ -22,14 +23,24 @@ class ProdutoDetalhe extends React.Component {
     this.setState({ detail });
   }
 
+  addToCart = (produto) => {
+    pushCarinho(produto);
+  }
+
   render() {
     const { detail } = this.state;
-    console.log(detail);
+
     return (
       <div>
         <Header />
         <img src={ detail.thumbnail } alt={ detail.title } />
         <p data-testid="product-detail-name">{`${detail.title}  R$${detail.price}`}</p>
+        <input
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          value="Adicionar ao carrinho"
+          onClick={ () => this.addToCart(detail) }
+        />
       </div>
     );
   }
