@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import TelaPrincipal from './components/TelaPrincipal';
 import CarrinhoCompras from './components/CarrinhoCompras';
+import ProdutoDetalhe from './components/ProdutoDetalhe';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/" component={ TelaPrincipal } />
         <Route exact path="/carrinho" component={ CarrinhoCompras } />
         <Route exact path="/:id" component={ TelaPrincipal } />
+        <Route exact path="/produto-detalhe/:id" component={ ProdutoDetalhe } />
       </Switch>
     </BrowserRouter>
   );
