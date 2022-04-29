@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getCarinho, newCarinho } from '../func/carrinhoDeCompras';
+import { getCarinho } from '../func/carrinhoDeCompras';
 
 class CarrinhoProduto extends React.Component {
   constructor() {
@@ -27,8 +27,10 @@ class CarrinhoProduto extends React.Component {
     const novaLista = listaProduto.filter((item) => item.id !== produto.id);
     this.setState({ novoArrayProdutos: novaLista },
       () => {
+        const { novaListaCarrinho } = this.props;
         const { novoArrayProdutos } = this.state;
-        newCarinho(novoArrayProdutos);
+
+        novaListaCarrinho(novoArrayProdutos);
       });
   }
 
@@ -71,6 +73,7 @@ CarrinhoProduto.propTypes = {
   produto: PropTypes.shape(
 
   ).isRequired,
+  novaListaCarrinho: PropTypes.func.isRequired,
 };
 
 export default CarrinhoProduto;

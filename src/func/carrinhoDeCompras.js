@@ -3,7 +3,10 @@ export function pushCarinho(obj) {
     localStorage.setItem('Carrinho', JSON.stringify([]));
   }
   const carrinho = JSON.parse(localStorage.getItem('Carrinho'));
-  localStorage.setItem('Carrinho', JSON.stringify([...carrinho, obj]));
+  const existi = carrinho.some((produto) => produto.id === obj.id);
+  if (!existi) {
+    localStorage.setItem('Carrinho', JSON.stringify([...carrinho, obj]));
+  }
 }
 
 export function getCarinho() {
