@@ -12,3 +12,10 @@ export function getCarinho() {
   }
   return JSON.parse(localStorage.getItem('Carrinho'));
 }
+
+export function newCarinho(obj) {
+  if (localStorage.getItem('Carrinho') === null) {
+    localStorage.setItem('Carrinho', JSON.stringify([]));
+  }
+  localStorage.setItem('Carrinho', JSON.stringify(obj));
+}
