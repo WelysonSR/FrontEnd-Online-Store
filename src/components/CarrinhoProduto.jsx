@@ -11,14 +11,25 @@ class CarrinhoProduto extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.valorTotalProduti('adicionar');
+  }
+
+  valorTotalProduti = (adicionarDiminuir) => {
+    const { produto, valorTotalProdutos } = this.props;
+    valorTotalProdutos(produto.price, adicionarDiminuir);
+  }
+
   quantidadeProduto = ({ target }) => {
     const { name } = target;
     const { quntidade } = this.state;
     if (name === 'adicionar') {
-      this.setState((prevState) => ({ quntidade: prevState.quntidade + 1 }));
+      this.setState((prevState) => ({ quntidade: prevState.quntidade + 1 }),
+        () => this.valorTotalProduti('adicionar'));
     }
     if (name === 'diminuir' && quntidade > 1) {
-      this.setState((prevState) => ({ quntidade: prevState.quntidade - 1 }));
+      this.setState((prevState) => ({ quntidade: prevState.quntidade - 1 }),
+        () => this.valorTotalProduti('diminuir'));
     }
   }
 
@@ -29,8 +40,8 @@ class CarrinhoProduto extends React.Component {
       () => {
         const { novaListaCarrinho } = this.props;
         const { novoArrayProdutos } = this.state;
-
         novaListaCarrinho(novoArrayProdutos);
+        this.valorTotalProduti('diminuir');
       });
   }
 
@@ -73,6 +84,7 @@ CarrinhoProduto.propTypes = {
   produto: PropTypes.shape(
 
   ).isRequired,
+  valorTotalProdutos: PropTypes.func.isRequired,
   novaListaCarrinho: PropTypes.func.isRequired,
 };
 

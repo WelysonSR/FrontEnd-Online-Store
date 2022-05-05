@@ -5,32 +5,19 @@ class ListaAvaliacao extends React.Component {
   constructor() {
     super();
     this.state = {
-      avaliacaoProduto: ['1', '2', '3', '4', '5'],
     };
   }
 
   render() {
     const { avaliacao } = this.props;
-    const { avaliacaoProduto } = this.state;
 
     return (
-      <form>
+      <section>
         <p>{avaliacao.email}</p>
-        {
-          avaliacaoProduto.map((nota, i) => (
-            <input
-              key={ i }
-              type="radio"
-              name="avaliacao"
-              value={ avaliacao.avaliacao }
-              checked
-              disabled
-            />
-          ))
-        }
+        <p>{`Nota: ${avaliacao.avaliacao}`}</p>
         <p>{avaliacao.descricao}</p>
         <hr />
-      </form>
+      </section>
     );
   }
 }
