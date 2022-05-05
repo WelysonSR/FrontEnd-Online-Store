@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Header from './Header';
 import { getCarinho, newCarinho } from '../func/carrinhoDeCompras';
 import CarrinhoProduto from './CarrinhoProduto';
@@ -39,11 +39,6 @@ class CarrinhoCompras extends React.Component {
     }
   }
 
-  finalizarCompra = () => {
-    const { history } = this.props;
-    history.push('/finalizar-compras');
-  }
-
   render() {
     const { carrinho, valorTotoaProdutos } = this.state;
     return (
@@ -67,25 +62,20 @@ class CarrinhoCompras extends React.Component {
           <br />
           <span>{`Sub Total: R${valorTotoaProdutos.toFixed(2)}`}</span>
           <br />
-          <input
-            type="button"
-            value="Flinalizar Compra"
-            onClick={ this.finalizarCompra }
+          <Link
+            to={ {
+              pathname: '/finalizar-compras',
+              state: { carrinho },
+            } }
+            className="btn btn-dark"
             data-testid="checkout-products"
-          />
+          >
+            Flinalizar Compra
+          </Link>
         </div>
       </>
     );
   }
 }
-
-CarrinhoCompras.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
-  // match: PropTypes.shape({
-  //   params: PropTypes.shape().isRequired,
-  // }).isRequired,
-};
 
 export default CarrinhoCompras;

@@ -1,81 +1,37 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from './Header';
+import InformacoesComprador from './InformacoesComprador';
+import MetodoPagamento from './MetodoPagamento';
 
 class FinalizarCompras extends React.Component {
   render() {
+    const { location } = this.props;
+    const { carrinho } = location.state;
     return (
       <>
         <Header />
         <section>
           <h5>Revise seus Produtos</h5>
+          {
+            carrinho.map((produto, i) => (
+              <div key={ i }>
+                <p>{produto.title}</p>
+                <img src={ produto.thumbnail } alt={ produto.title } />
+                <p>{produto.price}</p>
+              </div>
+            ))
+          }
         </section>
         <hr />
         <section>
           <h5>Informaçoes do Comprador</h5>
-          <form>
-            <input
-              type="text"
-              name="fullname"
-              data-testid="checkout-fullname"
-              placeholder="Nome Completo"
-            />
-            <input
-              type="text"
-              name="cpf"
-              data-testid="checkout-cpf"
-              placeholder="CPF"
-            />
-            <input
-              type="email"
-              name="email"
-              data-testid="checkout-email"
-              placeholder="Email"
-            />
-            <input
-              type="text"
-              name="number"
-              data-testid="checkout-phone"
-              placeholder="Telefone"
-            />
-            <input
-              type="text"
-              name="cep"
-              data-testid="checkout-cep"
-              placeholder="CEP"
-            />
-            <input
-              type="text"
-              name="address"
-              data-testid="checkout-address"
-              placeholder="Endereço"
-            />
-            <input
-              type="text"
-              name="complement"
-              placeholder="Complemento"
-            />
-            <input
-              type="text"
-              name="cit"
-              placeholder="Cidade"
-            />
-            <input
-              type="text"
-              name="number"
-              placeholder="Número"
-            />
-            <select>
-              <option>Estado</option>
-              <option value="BA">Bahia</option>
-              <option value="MG">Minas gerais</option>
-              <option value="AM">Amazonas</option>
-              <option value="MA">Maranhão</option>
-            </select>
-          </form>
+          <InformacoesComprador />
         </section>
         <hr />
         <section>
           <h5>Método de pagamento</h5>
+          <MetodoPagamento />
         </section>
         <hr />
         <input
@@ -86,5 +42,13 @@ class FinalizarCompras extends React.Component {
     );
   }
 }
+
+FinalizarCompras.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      carrinho: PropTypes.shape().isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 export default FinalizarCompras;
