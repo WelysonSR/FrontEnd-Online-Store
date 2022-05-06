@@ -23,7 +23,8 @@ class CarrinhoProduto extends React.Component {
   quantidadeProduto = ({ target }) => {
     const { name } = target;
     const { quntidade } = this.state;
-    if (name === 'adicionar') {
+    const { produto } = this.props;
+    if (name === 'adicionar' && produto.available_quantity !== quntidade) {
       this.setState((prevState) => ({ quntidade: prevState.quntidade + 1 }),
         () => this.valorTotalProduti('adicionar'));
     }
@@ -34,6 +35,7 @@ class CarrinhoProduto extends React.Component {
   }
 
   removerItem = (produto) => {
+    // const { sizeRendle } = this.props;
     const listaProduto = getCarinho();
     const novaLista = listaProduto.filter((item) => item.id !== produto.id);
     this.setState({ novoArrayProdutos: novaLista },
@@ -43,6 +45,7 @@ class CarrinhoProduto extends React.Component {
         novaListaCarrinho(novoArrayProdutos);
         this.valorTotalProduti('diminuir');
       });
+    // sizeRendle();
   }
 
   render() {
@@ -59,6 +62,11 @@ class CarrinhoProduto extends React.Component {
         <p data-testid="shopping-cart-product-name">{produto.title}</p>
         <img src={ produto.thumbnail } alt={ produto.title } />
         <p>{produto.price}</p>
+        {
+          produto.shipping.free_shipping && (
+            <p data-testid="free-shipping">Frete Grátis</p>
+          )
+        }
         <p>Quantidade</p>
         <p data-testid="shopping-cart-product-quantity">{quntidade}</p>
         <input
@@ -81,11 +89,11 @@ class CarrinhoProduto extends React.Component {
 }
 
 CarrinhoProduto.propTypes = {
-  produto: PropTypes.shape(
-
-  ).isRequired,
+  produto: PropTypes.shape().isRequired,
   valorTotalProdutos: PropTypes.func.isRequired,
   novaListaCarrinho: PropTypes.func.isRequired,
+  available_quantity: PropTypes.number.isRequired,
+  // sizeRendle: PropTypes.func.isRequired,
 };
 
 export default CarrinhoProduto;

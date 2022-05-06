@@ -22,3 +22,8 @@ export function newCarinho(obj) {
   }
   localStorage.setItem('Carrinho', JSON.stringify(obj));
 }
+
+export function quantProduto() {
+  const quantidade = getCarinho();
+  return quantidade.length;
+}

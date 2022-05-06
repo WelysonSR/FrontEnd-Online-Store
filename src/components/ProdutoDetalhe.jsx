@@ -32,7 +32,9 @@ class ProdutoDetalhe extends React.Component {
   }
 
   addToCart = (produto) => {
+    const { sizeRendle } = this.props;
     pushCarinho(produto);
+    sizeRendle();
   }
 
   handleChange = ({ target }) => {
@@ -68,9 +70,10 @@ class ProdutoDetalhe extends React.Component {
     const { detail, notas, email, descricao, listaAvaliacoes } = this.state;
     const novaListaAvaliacoes = listaAvaliacoes
       .filter((avaliaco) => avaliaco.id === detail.id);
+    const { size } = this.props;
     return (
       <div>
-        <Header />
+        <Header size={ size } />
         <img src={ detail.thumbnail } alt={ detail.title } />
         <p data-testid="product-detail-name">{`${detail.title}  R$${detail.price}`}</p>
         <input
@@ -137,6 +140,8 @@ ProdutoDetalhe.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,
+  sizeRendle: PropTypes.func.isRequired,
+  size: PropTypes.number.isRequired,
 };
 
 export default ProdutoDetalhe;

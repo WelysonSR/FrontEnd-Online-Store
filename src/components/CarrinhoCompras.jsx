@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Header from './Header';
 import { getCarinho, newCarinho } from '../func/carrinhoDeCompras';
@@ -41,9 +42,10 @@ class CarrinhoCompras extends React.Component {
 
   render() {
     const { carrinho, valorTotoaProdutos } = this.state;
+    const { size } = this.props;
     return (
       <>
-        <Header />
+        <Header size={ size } />
         <div>
           {
             (carrinho.length <= 0)
@@ -77,5 +79,9 @@ class CarrinhoCompras extends React.Component {
     );
   }
 }
+
+CarrinhoCompras.propTypes = {
+  size: PropTypes.number.isRequired,
+};
 
 export default CarrinhoCompras;

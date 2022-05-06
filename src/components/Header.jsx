@@ -1,11 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import carrinho from '../imagens/carrinho.png';
 
 class Header extends React.Component {
   render() {
+    const { size } = this.props;
     return (
-      <p data-testid="home-initial-message">
+      <>
         <input
           type="text"
           data-testid="query-input"
@@ -22,12 +24,18 @@ class Header extends React.Component {
           data-testid="shopping-cart-button"
         >
           <img src={ carrinho } alt="carrinho" width="30px" />
+          <span data-testid="shopping-cart-size">{ size }</span>
         </Link>
-
-        Digite algum termo de pesquisa ou escolha uma categoria.
-      </p>
+        <p data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </p>
+      </>
     );
   }
 }
+
+Header.propTypes = {
+  size: PropTypes.number.isRequired,
+};
 
 export default Header;

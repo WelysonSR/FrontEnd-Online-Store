@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Header from './Header';
 import InformacoesComprador from './InformacoesComprador';
 import MetodoPagamento from './MetodoPagamento';
 
@@ -10,7 +9,6 @@ class FinalizarCompras extends React.Component {
     const { carrinho } = location.state;
     return (
       <>
-        <Header />
         <section>
           <h5>Revise seus Produtos</h5>
           {

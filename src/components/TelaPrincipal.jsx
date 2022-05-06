@@ -30,17 +30,15 @@ class TelaPrincipal extends React.Component {
     const { location } = this.props;
     const id = location.pathname.split('/');
     const categoria = await getItemsByCategory(id[1]);
-    console.log(categoria);
     this.setState({ categoria: categoria.results });
   }
 
   render() {
     const { produtos, categoria } = this.state;
-    const { history } = this.props;
-
+    const { history, size, sizeRendle } = this.props;
     return (
       <>
-        <Header />
+        <Header size={ size } />
         <Category />
         {
           (categoria.length <= 0) ? (
@@ -49,6 +47,7 @@ class TelaPrincipal extends React.Component {
                 key={ index }
                 produto={ produto }
                 history={ history }
+                sizeRendle={ sizeRendle }
               />
             ))
           )
@@ -57,6 +56,7 @@ class TelaPrincipal extends React.Component {
                 key={ i }
                 produto={ produto }
                 history={ history }
+                sizeRendle={ sizeRendle }
               />
             ))
         }
@@ -72,6 +72,8 @@ TelaPrincipal.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,
+  size: PropTypes.number.isRequired,
+  sizeRendle: PropTypes.func.isRequired,
 };
 
 export default TelaPrincipal;
