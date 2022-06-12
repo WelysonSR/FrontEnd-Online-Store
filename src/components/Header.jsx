@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import carrinho from '../imagens/carrinho.png';
+import carrinho from '../img/carrinho.png';
 
 class Header extends React.Component {
   render() {

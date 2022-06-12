@@ -1,6 +1,6 @@
 import React from 'react';
-import Recibo from '../imagens/recibo.png';
-import Cartao from '../imagens/cartao-de-credito.png';
+import Recibo from '../img/recibo.png';
+import Cartao from '../img/cartao-de-credito.png';
 
 class MetodoPagamento extends React.Component {
   render() {
