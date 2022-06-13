@@ -1,21 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './CarrinhoProduto.css';
 import ApiContext from '../context/ApiContext';
 
 function CarrinhoProduto({ product }) {
-  const { shoppingCart, setShoppingCart } = useContext(ApiContext);
-  const [amount, setAmount] = React.useState(1);
+  const { shoppingCart, setShoppingCart, total, setTotal } = useContext(ApiContext);
+  const [amount, setAmount] = useState(1);
+
+  useEffect(() => {
+    setTotal(product.price);
+  }, [product.price, setTotal]);
 
   const remuveProduct = (obj) => {
     const newShoppingCart = shoppingCart
       .filter((productItem) => productItem.id !== obj.id);
     setShoppingCart(newShoppingCart);
+    setTotal(total - (product.price * amount));
   };
 
   const amountProduct = (action) => {
-    if (action === 'add' && product.available_quantity !== amount) setAmount(amount + 1);
-    if (action === 'remove' && amount > 1) setAmount(amount - 1);
+    if (action === 'add' && product.available_quantity !== amount) {
+      setAmount(amount + 1);
+      setTotal(total + product.price);
+    } else if (action === 'remove' && amount > 1) {
+      setAmount(amount - 1);
+      setTotal(total - product.price);
+    }
   };
 
   return (

@@ -6,7 +6,7 @@ import ApiContext from '../context/ApiContext';
 import './CarrinhoCompras.css';
 
 function CarrinhoCompras() {
-  const { shoppingCart } = useContext(ApiContext);
+  const { shoppingCart, total } = useContext(ApiContext);
 
   return (
     <>
@@ -20,14 +20,12 @@ function CarrinhoCompras() {
                 <CarrinhoProduto
                   key={ i }
                   product={ product }
-                  // novaListaCarrinho={}
-                  // valorTotalProdutos={  }
                 />
               ))
             )
         }
       </div>
-      <span>{`Sub Total: R$${2}`}</span>
+      <span>{`Sub Total: R$${total.toFixed(2)}`}</span>
       <br />
       <Link
         to={ {

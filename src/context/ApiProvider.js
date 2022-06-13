@@ -10,6 +10,7 @@ function ApiProvaider({ children }) {
   const [query, setQuery] = useState();
   const [permissionQuery, setPermissionQuery] = useState(true);
   const [shoppingCart, setShoppingCart] = useState([]);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     const fachDataCategories = async () => {
@@ -59,6 +60,8 @@ function ApiProvaider({ children }) {
     setQuery,
     shoppingCart,
     setShoppingCart,
+    total,
+    setTotal,
   };
 
   return (
