@@ -53,6 +53,13 @@ function ApiProvaider({ children }) {
     setCar();
   }, [shoppingCart]);
 
+  const addProduct = (obj) => {
+    const existi = shoppingCart.some((productItem) => productItem.id === obj.id);
+    if (!existi) {
+      setShoppingCart([...shoppingCart, obj]);
+    }
+  };
+
   const ApiData = {
     dataCategories,
     dataProducts,
@@ -62,6 +69,7 @@ function ApiProvaider({ children }) {
     setShoppingCart,
     total,
     setTotal,
+    addProduct,
   };
 
   return (

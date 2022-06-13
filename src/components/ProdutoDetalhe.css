@@ -1,0 +1,34 @@
+/* stylelint-disable linebreaks */
+.body-detalhe {
+  display: flex;
+  flex-wrap: wrap;
+  height: 600px;
+  justify-content: space-around;
+  margin-right: 2px;
+}
+
+.detalhe-item {
+  height: 617px;
+  width: 50%;
+}
+
+.detalhe-img {
+  height: 500px;
+  width: 100%;
+}
+
+.detalhe-avaliacao {
+  border: 2px solid red;
+  height: 617px;
+  overflow: auto;
+  width: 50%;
+}
+
+.btn-detalhe1 {
+  bottom: 0;
+  position: absolute;
+}
+
+.btn-detalhe2 {
+  margin-top: 10px;
+}

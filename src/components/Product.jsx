@@ -5,14 +5,7 @@ import ApiContext from '../context/ApiContext';
 import './Product.css';
 
 function Product({ product }) {
-  const { shoppingCart, setShoppingCart } = useContext(ApiContext);
-
-  const addProduct = (obj) => {
-    const existi = shoppingCart.some((productItem) => productItem.id === obj.id);
-    if (!existi) {
-      setShoppingCart([...shoppingCart, obj]);
-    }
-  };
+  const { addProduct } = useContext(ApiContext);
 
   return (
     <div className="card card-width">

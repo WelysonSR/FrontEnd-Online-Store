@@ -1,123 +1,108 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 import { productDetail } from '../services/api';
-import Header from './Header';
-import { pushCarinho } from '../func/carrinhoDeCompras';
 import { pushAvaliacao, getAvaliacao } from '../func/avaliador';
+import Header from './Header';
 import ListaAvaliacao from './ListaAvaliacao';
+import ApiContext from '../context/ApiContext';
+import './ProdutoDetalhe.css';
 
-class ProdutoDetalhe extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      detail: {},
-      notas: ['1', '2', '3', '4', '5'],
-      email: '',
-      avaliacao: '',
-      descricao: '',
-      listaAvaliacoes: [],
+function ProdutoDetalhe() {
+  const avaliacoes = ['1', '2', '3', '4', '5'];
+  const { addProduct } = useContext(ApiContext);
+  const [detail, setDetail] = useState({});
+  const [email, setEmail] = useState('');
+  const [nota, setNota] = useState('');
+  const [descricao, setDescricao] = useState('');
+  const [listaAvaliacoes, setListaAvaliacoes] = useState([]);
+  const location = useLocation();
+
+  useEffect(() => {
+    const detalheProduto = async () => {
+      const id = location.pathname.split('/produto-detalhe/');
+      const detailId = await productDetail(id[1]);
+      setDetail(detailId);
     };
-  }
+    detalheProduto();
+  }, [location.pathname]);
 
-  async componentDidMount() {
-    this.detalheProduto();
-    this.listaAvaliacoes();
-  }
+  const updateReview = () => {
+    setListaAvaliacoes(getAvaliacao());
+  };
 
-  detalheProduto = async () => {
-    const { location } = this.props;
-    const id = location.pathname.split('/produto-detalhe/');
-    const detail = await productDetail(id[1]);
-    this.setState({ detail });
-  }
+  useEffect(() => {
+    updateReview();
+  }, []);
 
-  addToCart = (produto) => {
-    const { sizeRendle } = this.props;
-    pushCarinho(produto);
-    sizeRendle();
-  }
-
-  handleChange = ({ target }) => {
-    const { name, value } = target;
-    this.setState({ [name]: value });
-  }
-
-  salvarAvaliacao = () => {
-    const { detail, email, avaliacao, descricao } = this.state;
+  const salvarAvaliacao = () => {
     const comentarioSobreProduto = {
       id: detail.id,
       email,
-      avaliacao,
+      nota,
       descricao,
     };
 
-    if (email !== '' && avaliacao !== '') {
+    if (email !== '' && nota !== '') {
       pushAvaliacao(comentarioSobreProduto);
-      this.setState({
-        email: '',
-        descricao: '',
-      });
-      this.listaAvaliacoes();
+      setEmail('');
+      setNota('');
+      setDescricao('');
+      updateReview();
     }
-  }
+  };
 
-  listaAvaliacoes = () => {
-    const listaAvaliacoes = getAvaliacao();
-    this.setState({ listaAvaliacoes });
-  }
+  const novaListaAvaliacoes = listaAvaliacoes
+    .filter((avaliaco) => avaliaco.id === detail.id);
 
-  render() {
-    const { detail, notas, email, descricao, listaAvaliacoes } = this.state;
-    const novaListaAvaliacoes = listaAvaliacoes
-      .filter((avaliaco) => avaliaco.id === detail.id);
-    const { size } = this.props;
-    return (
-      <div>
-        <Header size={ size } />
-        <img src={ detail.thumbnail } alt={ detail.title } />
-        <p data-testid="product-detail-name">{`${detail.title}  R$${detail.price}`}</p>
+  return (
+    <div className="body-detalhe">
+      <Header />
+      <div className="detalhe-item">
+        <img src={ detail.thumbnail } alt={ detail.title } className="detalhe-img" />
+        <p>{`${detail.title}  R$${detail.price}`}</p>
         <input
           type="button"
-          data-testid="product-detail-add-to-cart"
           value="Adicionar ao carrinho"
-          onClick={ () => this.addToCart(detail) }
+          className="btn btn-primary btn-detalhe1"
+          onClick={ () => addProduct(detail) }
         />
-        <hr />
+      </div>
+      <div className="detalhe-avaliacao">
         <form>
           <h3>Avaliação</h3>
           <input
             type="email"
             name="email"
             value={ email }
-            onChange={ this.handleChange }
+            className="form-control"
+            onChange={ (e) => setEmail(e.target.value) }
             placeholder="Digite seu email"
-            data-testid="product-detail-email"
           />
           {
-            notas.map((nota, i) => (
+            avaliacoes.map((avaliacao) => (
               <input
-                key={ i }
+                key={ avaliacao }
                 type="radio"
                 name="avaliacao"
-                value={ nota }
-                onChange={ this.handleChange }
-                data-testid={ `${nota}-rating` }
+                value={ avaliacao }
+                className="form-check-input"
+                onChange={ (e) => setNota(e.target.value) }
               />
             ))
           }
-          <br />
           <textarea
             name="descricao"
             value={ descricao }
-            onChange={ this.handleChange }
+            className="form-control"
+            onChange={ (e) => setDescricao(e.target.value) }
             placeholder="Mensagem (opcional)"
-            data-testid="product-detail-evaluation"
           />
-          <br />
           <input
             type="button"
             value="Avaliar"
-            onClick={ this.salvarAvaliacao }
+            className="btn btn-primary btn-detalhe2"
+            onClick={ salvarAvaliacao }
             data-testid="submit-review-btn"
           />
         </form>
@@ -132,16 +117,14 @@ class ProdutoDetalhe extends React.Component {
           ))
         }
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 ProdutoDetalhe.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,
-  sizeRendle: PropTypes.func.isRequired,
-  size: PropTypes.number.isRequired,
 };
 
 export default ProdutoDetalhe;
