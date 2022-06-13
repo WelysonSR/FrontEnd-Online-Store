@@ -11,6 +11,7 @@ function ApiProvaider({ children }) {
   const [permissionQuery, setPermissionQuery] = useState(true);
   const [shoppingCart, setShoppingCart] = useState([]);
   const [total, setTotal] = useState(0);
+  const [carSize, setCarSize] = useState(0);
 
   useEffect(() => {
     const fachDataCategories = async () => {
@@ -51,6 +52,7 @@ function ApiProvaider({ children }) {
       localStorage.setItem('Carrinho', JSON.stringify(shoppingCart));
     };
     setCar();
+    setCarSize(shoppingCart.length);
   }, [shoppingCart]);
 
   const addProduct = (obj) => {
@@ -70,6 +72,7 @@ function ApiProvaider({ children }) {
     total,
     setTotal,
     addProduct,
+    carSize,
   };
 
   return (
