@@ -1,0 +1,10 @@
+/* stylelint-disable linebreaks */
+.bodyProducts {
+  display: flex;
+  flex-wrap: wrap;
+  height: 617px;
+  justify-content: space-around;
+  margin-right: 2px;
+  overflow: auto;
+  width: 1114px;
+}

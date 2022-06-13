@@ -1,0 +1,29 @@
+/* stylelint-disable linebreaks */
+.card-width-product {
+  margin-top: 10px;
+  width: 18rem;
+}
+
+.img-card {
+  height: 250px;
+  width: 100%;
+}
+
+.btn-x {
+  position: absolute;
+  right: 0;
+  width: 40px;
+}
+
+.btn-add {
+  bottom: 40px;
+  position: absolute;
+  width: 100%;
+}
+
+.btn-remove {
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+}
+

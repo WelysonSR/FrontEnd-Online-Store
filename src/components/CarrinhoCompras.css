@@ -1,0 +1,9 @@
+/* stylelint-disable linebreaks */
+.carrinho {
+  display: flex;
+  flex-wrap: wrap;
+  height: 550px;
+  justify-content: space-around;
+  overflow: auto;
+  width: 100%;
+}

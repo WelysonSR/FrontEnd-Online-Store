@@ -7,13 +7,22 @@ function ApiProvaider({ children }) {
   const [dataCategories, setDataCategories] = useState([]);
   const [dataProducts, setDataProducts] = useState([]);
   const [categoryId, setCategoryId] = useState('');
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState();
+  const [permissionQuery, setPermissionQuery] = useState(true);
+  const [shoppingCart, setShoppingCart] = useState([]);
 
   useEffect(() => {
     const fachDataCategories = async () => {
       setDataCategories(await getCategories());
     };
     fachDataCategories();
+    const getCar = () => {
+      if (localStorage.getItem('Carrinho') === null) {
+        localStorage.setItem('Carrinho', JSON.stringify([]));
+      }
+      setShoppingCart(JSON.parse(localStorage.getItem('Carrinho')));
+    };
+    getCar();
   }, []);
 
   useEffect(() => {
@@ -22,7 +31,8 @@ function ApiProvaider({ children }) {
       setDataProducts(results);
     };
     fachProductsByQuery();
-  }, [query]);
+    setPermissionQuery(false);
+  }, [query, permissionQuery]);
 
   useEffect(() => {
     const fachProductsByCategory = async () => {
@@ -32,11 +42,23 @@ function ApiProvaider({ children }) {
     fachProductsByCategory();
   }, [categoryId]);
 
+  useEffect(() => {
+    const setCar = () => {
+      if (localStorage.getItem('Carrinho') === null) {
+        localStorage.setItem('Carrinho', JSON.stringify([]));
+      }
+      localStorage.setItem('Carrinho', JSON.stringify(shoppingCart));
+    };
+    setCar();
+  }, [shoppingCart]);
+
   const ApiData = {
     dataCategories,
     dataProducts,
     setCategoryId,
     setQuery,
+    shoppingCart,
+    setShoppingCart,
   };
 
   return (

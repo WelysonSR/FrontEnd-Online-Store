@@ -1,16 +1,18 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import ApiContext from '../context/ApiContext';
+import './Category.css';
 
 function Category() {
   const { dataCategories } = useContext(ApiContext);
 
   return (
-    <ul>
+    <ul className="nav flex-column">
       {dataCategories.map((category) => (
         <Link
           to={ `/${category.id}` }
           key={ category.id }
+          className="nav-link"
         >
           <li>
             {category.name}

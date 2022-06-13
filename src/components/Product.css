@@ -1,0 +1,22 @@
+/* stylelint-disable linebreaks */
+.card-width {
+  margin-top: 30px;
+  width: 18rem;
+}
+
+.img-card {
+  height: 250px;
+  width: 100%;
+}
+
+.btn-card {
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.card-link {
+  color: black;
+  margin-bottom: 20px;
+  text-decoration: none;
+}

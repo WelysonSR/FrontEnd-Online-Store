@@ -1,14 +1,17 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import Products from './components/Products';
+import ProdutoDetalhe from './components/ProdutoDetalhe';
+import CarrinhoCompras from './components/CarrinhoCompras';
 import './App.css';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/:id" component={ Products } />
+        <Route exact path="/carrinho" component={ CarrinhoCompras } />
+        <Route exact path="/produto-detalhe/:id" component={ ProdutoDetalhe } />
+        <Route exact path="/:id" component={ Home } />
         <Route exact path="/" component={ Home } />
       </Switch>
     </BrowserRouter>

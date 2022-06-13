@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import ApiContext from '../context/ApiContext';
 import Product from './Product';
+import './Products.css';
 
 function Products() {
   const { dataProducts, setCategoryId } = useContext(ApiContext);
@@ -13,7 +14,7 @@ function Products() {
   }, [location, setCategoryId]);
 
   return (
-    <section>
+    <section className="bodyProducts">
       {
         dataProducts.map((product, i) => (
           <Product

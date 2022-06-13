@@ -1,0 +1,6 @@
+/* stylelint-disable linebreaks */
+.bodyDiv {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

@@ -1,0 +1,7 @@
+/* stylelint-disable linebreaks */
+.nav {
+  display: block;
+  height: 617px;
+  overflow: auto;
+  width: 250px;
+}
