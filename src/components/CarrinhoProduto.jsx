@@ -1,15 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import './CarrinhoProduto.css';
+import ApiContext from '../context/ApiContext';
 
 function CarrinhoProduto({ product }) {
+  const { shoppingCart, setShoppingCart } = useContext(ApiContext);
+  const [amount, setAmount] = React.useState(1);
+
+  const remuveProduct = (obj) => {
+    const newShoppingCart = shoppingCart
+      .filter((productItem) => productItem.id !== obj.id);
+    setShoppingCart(newShoppingCart);
+  };
+
+  const amountProduct = (action) => {
+    if (action === 'add' && product.available_quantity !== amount) setAmount(amount + 1);
+    if (action === 'remove' && amount > 1) setAmount(amount - 1);
+  };
+
   return (
     <div className="card card-width-product">
       <input
         type="button"
         value="X"
         className="btn btn-danger btn-x"
-        onClick={ () => {} }
+        onClick={ () => remuveProduct(product) }
       />
       <img src={ product.thumbnail } alt={ product.title } className="img-card" />
       <h5 className="card-title">{product.title}</h5>
@@ -20,20 +35,20 @@ function CarrinhoProduto({ product }) {
         )
       }
       <p>Quantidade</p>
-      <p>{2}</p>
+      <p>{amount}</p>
       <input
         type="button"
         name="adicionar"
         value="+"
         className="btn btn-success btn-add"
-        onClick={ () => {} }
+        onClick={ () => amountProduct('add') }
       />
       <input
         type="button"
         name="diminuir"
         value="-"
         className="btn btn-danger btn-remove"
-        onClick={ () => {} }
+        onClick={ () => amountProduct('remove') }
       />
     </div>
   );
@@ -48,6 +63,7 @@ CarrinhoProduto.propTypes = {
     shipping: PropTypes.shape({
       free_shipping: PropTypes.bool.isRequired,
     }).isRequired,
+    available_quantity: PropTypes.number,
   }).isRequired,
 };
 
