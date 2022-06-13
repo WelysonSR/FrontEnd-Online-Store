@@ -1,20 +1,42 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ApiContext from './ApiContext';
-import { getCategories } from '../services/api';
+import { getCategories, getItemsByCategory, getItemsByQuery } from '../services/api';
 
 function ApiProvaider({ children }) {
-  const [data, setData] = React.useState([]);
+  const [dataCategories, setDataCategories] = useState([]);
+  const [dataProducts, setDataProducts] = useState([]);
+  const [categoryId, setCategoryId] = useState('');
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
-    const fachData = async () => {
-      setData(await getCategories());
+    const fachDataCategories = async () => {
+      setDataCategories(await getCategories());
     };
-    fachData();
+    fachDataCategories();
   }, []);
 
+  useEffect(() => {
+    const fachProductsByQuery = async () => {
+      const { results } = await getItemsByQuery(query);
+      setDataProducts(results);
+    };
+    fachProductsByQuery();
+  }, [query]);
+
+  useEffect(() => {
+    const fachProductsByCategory = async () => {
+      const { results } = await getItemsByCategory(categoryId);
+      setDataProducts(results);
+    };
+    fachProductsByCategory();
+  }, [categoryId]);
+
   const ApiData = {
-    data,
+    dataCategories,
+    dataProducts,
+    setCategoryId,
+    setQuery,
   };
 
   return (
