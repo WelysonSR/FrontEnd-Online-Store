@@ -2,7 +2,7 @@
 .bodyProducts {
   display: flex;
   flex-wrap: wrap;
-  height: 617px;
+  height: 589px;
   justify-content: space-around;
   margin-right: 2px;
   overflow: auto;

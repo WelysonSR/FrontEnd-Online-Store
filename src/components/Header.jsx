@@ -1,7 +1,5 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ApiContext from '../context/ApiContext';
 import carrinho from '../img/carrinho.png';
 import './Header.css';
@@ -9,7 +7,6 @@ import './Header.css';
 function Header() {
   const { setQuery, carSize } = useContext(ApiContext);
   const [search, setSearch] = useState('');
-  const history = useHistory();
 
   const handleClick = () => {
     setQuery(search);
@@ -35,13 +32,14 @@ function Header() {
           />
         </div>
       </form>
-      <img
-        src={ carrinho }
-        alt="carrinho"
-        className="carrinho-header"
-        onClick={ () => history.push('/carrinho') }
-      />
-      <h5 className="carSize">{carSize > 0 && carSize}</h5>
+      <Link to="/carrinho">
+        <img
+          src={ carrinho }
+          alt="carrinho"
+          className="carrinho-header"
+        />
+        <h5 className="carSize">{carSize > 0 && carSize}</h5>
+      </Link>
     </header>
   );
 }
