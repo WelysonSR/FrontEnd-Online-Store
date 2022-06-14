@@ -16,12 +16,16 @@ function Products() {
   return (
     <section className="bodyProducts">
       {
-        dataProducts.map((product, i) => (
-          <Product
-            key={ i }
-            product={ product }
-          />
-        ))
+        dataProducts.length > 0 ? (
+          dataProducts.map((product, i) => (
+            <Product
+              key={ i }
+              product={ product }
+            />
+          )))
+          : (
+            <p>Digite algum termo de pesquisa ou escolha uma categoria.</p>
+          )
       }
     </section>
   );
