@@ -10,7 +10,7 @@ function Category() {
     <ul className="nav flex-column">
       {dataCategories.map((category) => (
         <Link
-          to={ `/${category.id}` }
+          to={ `/initial/${category.id}` }
           key={ category.id }
           className="nav-link"
         >
