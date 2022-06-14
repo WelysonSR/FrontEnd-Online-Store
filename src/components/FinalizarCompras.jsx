@@ -1,52 +1,51 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import InformacoesComprador from './InformacoesComprador';
 import MetodoPagamento from './MetodoPagamento';
+import ApiContext from '../context/ApiContext';
+import './FinalizarCompras.css';
 
-class FinalizarCompras extends React.Component {
-  render() {
-    const { location } = this.props;
-    const { carrinho } = location.state;
-    return (
-      <>
+function FinalizarCompras() {
+  const { shoppingCart } = useContext(ApiContext);
+  return (
+    <section className="pagamento">
+      <div className="revisar-produtos">
+        <h4>Revise seus Produtos</h4>
         <section>
-          <h5>Revise seus Produtos</h5>
           {
-            carrinho.map((produto, i) => (
-              <div key={ i }>
+            shoppingCart.map((produto, i) => (
+              <div key={ i } className="revisao-rupo">
+                <img
+                  src={ produto.thumbnail }
+                  alt={ produto.title }
+                  className="rvisao-img"
+                />
                 <p>{produto.title}</p>
-                <img src={ produto.thumbnail } alt={ produto.title } />
-                <p>{produto.price}</p>
+                <p>{`R$${produto.price}`}</p>
               </div>
             ))
           }
         </section>
-        <hr />
-        <section>
+      </div>
+      <hr />
+      <section className="dados-pagamento">
+        <div>
           <h5>Informaçoes do Comprador</h5>
           <InformacoesComprador />
-        </section>
+        </div>
         <hr />
-        <section>
+        <div>
           <h5>Método de pagamento</h5>
           <MetodoPagamento />
-        </section>
+        </div>
         <hr />
         <input
           type="button"
           value="Comprar"
+          className="btn btn-primary"
         />
-      </>
-    );
-  }
+      </section>
+    </section>
+  );
 }
-
-FinalizarCompras.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.shape({
-      carrinho: PropTypes.shape().isRequired,
-    }).isRequired,
-  }).isRequired,
-};
 
 export default FinalizarCompras;

@@ -1,0 +1,36 @@
+/* stylelint-disable linebreaks */
+.pagamento {
+  display: flex;
+}
+
+.revisar-produtos {
+  height: 650px;
+  overflow: auto;
+  text-align: center;
+  width: 50%;
+}
+
+.rvisao {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dados-pagamento {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 50%;
+}
+
+.rvisao-img {
+  width: 100px;
+}
+
+.revisao-rupo {
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 640px;
+}
