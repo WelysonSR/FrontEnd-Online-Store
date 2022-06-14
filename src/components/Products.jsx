@@ -9,7 +9,7 @@ function Products() {
   const { dataProducts, setCategoryId } = useContext(ApiContext);
   const location = useLocation();
   useEffect(() => {
-    const categoryId = location.pathname.split('/')[2];
+    const categoryId = location.pathname.split('/')[1];
     setCategoryId(categoryId);
   }, [location, setCategoryId]);
 

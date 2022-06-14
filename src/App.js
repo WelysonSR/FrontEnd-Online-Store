@@ -15,8 +15,8 @@ function App() {
         <Route exact path="/finalizar-compras" component={ FinalizarCompras } />
         <Route exact path="/carrinho" component={ CarrinhoCompras } />
         <Route exact path="/produto-detalhe/:id" component={ ProdutoDetalhe } />
-        <Route exact path="/initial/:id" component={ Home } />
-        <Route exact path="/initial" component={ Home } />
+        <Route exact path="/:id" component={ Home } />
+        <Route exact path="/" component={ Home } />
       </Switch>
     </BrowserRouter>
   );

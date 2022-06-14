@@ -12,7 +12,7 @@ function CompraConcluida() {
       const time = 3000;
       setTimeout(() => {
         setShoppingCart([]);
-        history.push('/initial');
+        history.push('/');
       }, time);
     };
     setTime();
