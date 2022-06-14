@@ -5,11 +5,13 @@ import ProdutoDetalhe from './components/ProdutoDetalhe';
 import CarrinhoCompras from './components/CarrinhoCompras';
 import FinalizarCompras from './components/FinalizarCompras';
 import './App.css';
+import CompraConcluida from './components/CompraConcluida';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route exact path="/compra-concluida" component={ CompraConcluida } />
         <Route exact path="/finalizar-compras" component={ FinalizarCompras } />
         <Route exact path="/carrinho" component={ CarrinhoCompras } />
         <Route exact path="/produto-detalhe/:id" component={ ProdutoDetalhe } />
