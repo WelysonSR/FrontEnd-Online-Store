@@ -15,7 +15,9 @@ function Header() {
 
   return (
     <header className="header">
-      <h1 className="h1-header">Fast Buy</h1>
+      <Link to="/" className="card-link">
+        <h1 className="h1-header">Fast Buy</h1>
+      </Link>
       <form className="formHeader">
         <div className="input-group mb-3">
           <input
