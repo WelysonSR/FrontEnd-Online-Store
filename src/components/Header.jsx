@@ -8,7 +8,8 @@ function Header() {
   const { setQuery, carSize } = useContext(ApiContext);
   const [search, setSearch] = useState('');
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
     setQuery(search);
     setSearch('');
   };
@@ -18,7 +19,7 @@ function Header() {
       <Link to="/" className="card-link">
         <h1 className="h1-header">Fast Buy</h1>
       </Link>
-      <form className="formHeader">
+      <form className="formHeader" onSubmit={ handleClick }>
         <div className="input-group mb-3">
           <input
             type="text"
@@ -26,12 +27,12 @@ function Header() {
             className="form-control input-header"
             onChange={ ({ target }) => setSearch(target.value) }
           />
-          <input
-            type="button"
-            value="Search"
+          <button
+            type="submit"
             className="btn btn-primary"
-            onClick={ handleClick }
-          />
+          >
+            Search
+          </button>
         </div>
       </form>
       <Link to="/carrinho">
