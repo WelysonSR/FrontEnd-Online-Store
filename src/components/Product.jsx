@@ -18,11 +18,11 @@ function Product({ product }) {
           alt={ product.title }
           className="card-img-top img-card"
         />
-        <h5 className="card-title">{product.title}</h5>
-        <p className="card-text">{`R$ ${product.price}`}</p>
+        <h6 className="card-title">{product.title}</h6>
+        <p className="card-text card-price">{`R$ ${product.price}`}</p>
         {
           product.shipping.free_shipping && (
-            <p className="card-text">Frete Grátis</p>
+            <p className="card-text card-free">Frete Grátis</p>
           )
         }
       </Link>
