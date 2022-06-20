@@ -8,23 +8,23 @@ function CarrinhoProduto({ product }) {
   const [amount, setAmount] = useState(1);
 
   useEffect(() => {
-    setTotal(product.price);
+    setTotal((product.price / 100));
   }, [product.price, setTotal]);
 
   const remuveProduct = (obj) => {
     const newShoppingCart = shoppingCart
       .filter((productItem) => productItem.id !== obj.id);
     setShoppingCart(newShoppingCart);
-    setTotal(total - (product.price * amount));
+    setTotal(total - ((product.price / 100) * amount));
   };
 
   const amountProduct = (action) => {
     if (action === 'add' && product.available_quantity !== amount) {
       setAmount(amount + 1);
-      setTotal(total + product.price);
+      setTotal(total + (product.price / 100));
     } else if (action === 'remove' && amount > 1) {
       setAmount(amount - 1);
-      setTotal(total - product.price);
+      setTotal(total - (product.price / 100));
     }
   };
 
@@ -38,7 +38,9 @@ function CarrinhoProduto({ product }) {
       />
       <img src={ product.thumbnail } alt={ product.title } className="img-card" />
       <h6 className="card-title">{product.title}</h6>
-      <p className="card-text">{product.price}</p>
+      <p className="card-text">
+        {`R$ ${(product.price / 100).toFixed(2)}`}
+      </p>
       {
         product.shipping.free_shipping && (
           <p className="card-text card-frete">Frete Grátis</p>

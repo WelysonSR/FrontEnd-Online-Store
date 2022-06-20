@@ -19,7 +19,9 @@ function Product({ product }) {
           className="card-img-top img-card"
         />
         <h6 className="card-title">{product.title}</h6>
-        <p className="card-text card-price">{`R$ ${product.price}`}</p>
+        <p className="card-text card-price">
+          {`R$ ${(product.price / 100).toFixed(2)}`}
+        </p>
         {
           product.shipping.free_shipping && (
             <p className="card-text card-free">Frete Grátis</p>
