@@ -27,3 +27,8 @@
   width: 100%;
 }
 
+.card-frete {
+  bottom: 60px;
+  position: absolute;
+  right: 10px;
+}

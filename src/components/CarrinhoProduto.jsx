@@ -37,11 +37,11 @@ function CarrinhoProduto({ product }) {
         onClick={ () => remuveProduct(product) }
       />
       <img src={ product.thumbnail } alt={ product.title } className="img-card" />
-      <h5 className="card-title">{product.title}</h5>
+      <h6 className="card-title">{product.title}</h6>
       <p className="card-text">{product.price}</p>
       {
         product.shipping.free_shipping && (
-          <p className="card-text">Frete Grátis</p>
+          <p className="card-text card-frete">Frete Grátis</p>
         )
       }
       <p>Quantidade</p>
