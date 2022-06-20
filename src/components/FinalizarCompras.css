@@ -30,7 +30,16 @@
 
 .revisao-rupo {
   display: flex;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 10px;
   width: 640px;
+}
+
+.price {
+  padding: 0 0 0 10px;
+  position: relative;
+  right: 0;
+}
+
+.title {
+  width: 480px;
 }

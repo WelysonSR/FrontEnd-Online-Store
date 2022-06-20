@@ -12,7 +12,7 @@ function FinalizarCompras() {
     <section className="pagamento">
       <div className="revisar-produtos">
         <h4>Revise seus Produtos</h4>
-        <section>
+        <section className="item-finished">
           {
             shoppingCart.map((produto, i) => (
               <div key={ i } className="revisao-rupo">
@@ -21,8 +21,8 @@ function FinalizarCompras() {
                   alt={ produto.title }
                   className="rvisao-img"
                 />
-                <p>{produto.title}</p>
-                <p>{`R$${produto.price}`}</p>
+                <p className="title">{produto.title}</p>
+                <p className="price">{`R$${produto.price / 100}`}</p>
               </div>
             ))
           }
